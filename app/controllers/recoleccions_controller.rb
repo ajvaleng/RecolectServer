@@ -7,6 +7,7 @@ class RecoleccionsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @recoleccions }
+      format.csv { send_data @recoleccions.to_csv }
     end
   end
 

@@ -20,6 +20,9 @@ RecolectServer::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # If you are deploying Rails 3.1+ on Heroku, you may want to set:
+  config.assets.initialize_on_precompile = false
+  
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
