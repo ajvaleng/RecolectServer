@@ -1,60 +1,41 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Recoleccion -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Llegada paradero:</b>
-  <%= @recoleccion.llegada_paradero %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:presonas_suben) %>:</strong></dt>
+  <dd><%= @recoleccion.presonas_suben %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:personas_bajan) %>:</strong></dt>
+  <dd><%= @recoleccion.personas_bajan %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:long) %>:</strong></dt>
+  <dd><%= @recoleccion.long %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:lat) %>:</strong></dt>
+  <dd><%= @recoleccion.lat %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:recorrido) %>:</strong></dt>
+  <dd><%= @recoleccion.recorrido %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:patente) %>:</strong></dt>
+  <dd><%= @recoleccion.patente %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
+  <dd><%= @recoleccion.nombre %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:puerta) %>:</strong></dt>
+  <dd><%= @recoleccion.puerta %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:periodo) %>:</strong></dt>
+  <dd><%= @recoleccion.periodo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:llegada_paradero) %>:</strong></dt>
+  <dd><%= @recoleccion.llegada_paradero %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:salida_paradero) %>:</strong></dt>
+  <dd><%= @recoleccion.salida_paradero %></dd>
+</dl>
 
-<p>
-  <b>Salida paradero:</b>
-  <%= @recoleccion.salida_paradero %>
-</p>
-
-<p>
-  <b>Presonas suben:</b>
-  <%= @recoleccion.presonas_suben %>
-</p>
-
-<p>
-  <b>Personas bajan:</b>
-  <%= @recoleccion.personas_bajan %>
-</p>
-
-<p>
-  <b>Long:</b>
-  <%= @recoleccion.long %>
-</p>
-
-<p>
-  <b>Lat:</b>
-  <%= @recoleccion.lat %>
-</p>
-
-<p>
-  <b>Recorrido:</b>
-  <%= @recoleccion.recorrido %>
-</p>
-
-<p>
-  <b>Patente:</b>
-  <%= @recoleccion.patente %>
-</p>
-
-<p>
-  <b>Nombre:</b>
-  <%= @recoleccion.nombre %>
-</p>
-
-<p>
-  <b>Puerta:</b>
-  <%= @recoleccion.puerta %>
-</p>
-
-<p>
-  <b>Periodo:</b>
-  <%= @recoleccion.periodo %>
-</p>
-
-
-<%= link_to 'Edit', edit_recoleccion_path(@recoleccion) %> |
-<%= link_to 'Back', recoleccions_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              recoleccions_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_recoleccion_path(@recoleccion), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              recoleccion_path(@recoleccion),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

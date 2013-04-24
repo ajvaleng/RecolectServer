@@ -1,61 +1,74 @@
-<%= form_for(@recoleccion) do |f| %>
-  <% if @recoleccion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recoleccion.errors.count, "error") %> prohibited this recoleccion from being saved:</h2>
-
-      <ul>
-      <% @recoleccion.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @recoleccion, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :presonas_suben, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :presonas_suben, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :personas_bajan, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :personas_bajan, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :long, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :long, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :lat, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lat, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :recorrido, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :recorrido, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :patente, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :patente, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :nombre, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :nombre, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :puerta, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :puerta, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :periodo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :periodo, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :llegada_paradero, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :llegada_paradero, :class => 'datetime_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :salida_paradero, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :salida_paradero, :class => 'datetime_select' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :llegada_paradero %><br />
-    <%= f.text_field :llegada_paradero %>
-  </div>
-  <div class="field">
-    <%= f.label :salida_paradero %><br />
-    <%= f.text_field :salida_paradero %>
-  </div>
-  <div class="field">
-    <%= f.label :presonas_suben %><br />
-    <%= f.text_field :presonas_suben %>
-  </div>
-  <div class="field">
-    <%= f.label :personas_bajan %><br />
-    <%= f.text_field :personas_bajan %>
-  </div>
-  <div class="field">
-    <%= f.label :long %><br />
-    <%= f.text_field :long %>
-  </div>
-  <div class="field">
-    <%= f.label :lat %><br />
-    <%= f.text_field :lat %>
-  </div>
-  <div class="field">
-    <%= f.label :recorrido %><br />
-    <%= f.text_field :recorrido %>
-  </div>
-  <div class="field">
-    <%= f.label :patente %><br />
-    <%= f.text_field :patente %>
-  </div>
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :puerta %><br />
-    <%= f.text_field :puerta %>
-  </div>
-  <div class="field">
-    <%= f.label :periodo %><br />
-    <%= f.text_field :periodo %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                recoleccions_path, :class => 'btn' %>
   </div>
 <% end %>
