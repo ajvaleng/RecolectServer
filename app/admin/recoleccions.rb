@@ -13,6 +13,11 @@ ActiveAdmin.register Recoleccion do
     column :periodo    
   end
   
-    #filter :llegada_paradero
-    
+    filter :llegada_paradero
+    filter :salida_paradero
+    filter :recorrido
+    filter :patente
+    filter :nombre
+    filter :puerta
+    filter :periodo
 end
