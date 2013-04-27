@@ -8,10 +8,10 @@
   <dd><%= @recoleccion.presonas_suben %></dd>
   <dt><strong><%= model_class.human_attribute_name(:personas_bajan) %>:</strong></dt>
   <dd><%= @recoleccion.personas_bajan %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:long) %>:</strong></dt>
-  <dd><%= @recoleccion.long %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:lat) %>:</strong></dt>
-  <dd><%= @recoleccion.lat %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
+  <dd><%= @recoleccion.longitude %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
+  <dd><%= @recoleccion.latitude %></dd>
   <dt><strong><%= model_class.human_attribute_name(:recorrido) %>:</strong></dt>
   <dd><%= @recoleccion.recorrido %></dd>
   <dt><strong><%= model_class.human_attribute_name(:patente) %>:</strong></dt>
@@ -26,6 +26,8 @@
   <dd><%= @recoleccion.llegada_paradero %></dd>
   <dt><strong><%= model_class.human_attribute_name(:salida_paradero) %>:</strong></dt>
   <dd><%= @recoleccion.salida_paradero %></dd>
+
+	
 </dl>
 
 <div class="form-actions">

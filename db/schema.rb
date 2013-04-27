@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426205121) do
+ActiveRecord::Schema.define(:version => 20130427203631) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(:version => 20130426205121) do
   create_table "recoleccions", :force => true do |t|
     t.integer  "presonas_suben"
     t.integer  "personas_bajan"
-    t.float    "long"
-    t.float    "lat"
+    t.float    "longitude"
+    t.float    "latitude"
     t.string   "recorrido"
     t.string   "patente"
     t.string   "nombre"
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20130426205121) do
     t.string   "stopid"
     t.string   "stopdcode"
     t.string   "stopname"
-    t.float    "stoplat"
-    t.float    "stoplon"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
