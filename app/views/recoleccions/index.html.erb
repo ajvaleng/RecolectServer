@@ -8,8 +8,8 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:presonas_suben) %></th>
       <th><%= model_class.human_attribute_name(:personas_bajan) %></th>
-      <th><%= model_class.human_attribute_name(:longitude) %></th>
-      <th><%= model_class.human_attribute_name(:latitude) %></th>
+      <th><%= model_class.human_attribute_name(:long) %></th>
+      <th><%= model_class.human_attribute_name(:lat) %></th>
       <th><%= model_class.human_attribute_name(:recorrido) %></th>
       <th><%= model_class.human_attribute_name(:patente) %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
@@ -27,8 +27,8 @@
         <td><%= link_to recoleccion.id, recoleccion_path(recoleccion) %></td>
         <td><%= recoleccion.presonas_suben %></td>
         <td><%= recoleccion.personas_bajan %></td>
-        <td><%= recoleccion.longitude %></td>
-        <td><%= recoleccion.latitude %></td>
+        <td><%= recoleccion.long %></td>
+        <td><%= recoleccion.lat %></td>
         <td><%= recoleccion.recorrido %></td>
         <td><%= recoleccion.patente %></td>
         <td><%= recoleccion.nombre %></td>

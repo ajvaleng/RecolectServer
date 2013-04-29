@@ -4,8 +4,8 @@ class CreateStops < ActiveRecord::Migration
       t.string :stopid
       t.string :stopdcode
       t.string :stopname
-      t.float :latitude
-      t.float :longitude
+      t.float :stoplat
+      t.float :stoplon
 
       t.timestamps
     end
