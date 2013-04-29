@@ -13,6 +13,8 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+gem 'geocoder'
+
 gem 'activeadmin'
 
 # Gems used only for assets and not required

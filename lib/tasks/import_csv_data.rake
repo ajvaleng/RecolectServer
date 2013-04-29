@@ -9,8 +9,8 @@ namespace :db do
         :stopid => row[0],
         :stopcode=> row[1],
         :stopname=> row[2],
-        :stoplat=> row[3],
-        :stoplon=> row[4]
+        :latitude=> row[3],
+        :logitude=> row[4]
       )
     end
   end
