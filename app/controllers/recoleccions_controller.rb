@@ -1,4 +1,6 @@
-class RecoleccionsController < ApplicationController
+class RecoleccionsController < ApplicationController  
+ require 'json'
+  
   # GET /recoleccions
   # GET /recoleccions.json
   def index
@@ -41,15 +43,33 @@ class RecoleccionsController < ApplicationController
   # POST /recoleccions
   # POST /recoleccions.json
   def create
-    @recoleccion = Recoleccion.new(params[:recoleccion])
+    # buscar 
+    
+    
+    recoleccions = Array.new
+    all_recoleccion_valid = true
+    params[:recoleccion].each do |recoleccion|
+      new_recoleccion = Recoleccion.new(recoleccion)
+      recoleccions << new_recoleccion
+      unless new_recoleccion.valid?
+        all_recoleccion_valid = false
+        invalid_recoleccion = recoleccion
+      end
+    end
 
     respond_to do |format|
-      if @recoleccion.save
-        format.html { redirect_to @recoleccion, notice: 'Recoleccion was successfully created.' }
-        format.json { render json: @recoleccion, status: :created, location: @recoleccion }
+      if all_recoleccion_valid
+        @recoleccions = []
+        recoleccions.each do |recoleccion|
+              recoleccion.save
+              @recoleccions << recoleccion
+            end
+        
+        format.html { redirect_to @recoleccions.first, notice: 'Recoleccion was successfully created.' }
+        format.json { render json: @recoleccions, status: :created }
       else
         format.html { render action: "new" }
-        format.json { render json: @recoleccion.errors, status: :unprocessable_entity }
+        format.json { render json: invalid_recoleccion.errors, status: :unprocessable_entity }
       end
     end
   end
