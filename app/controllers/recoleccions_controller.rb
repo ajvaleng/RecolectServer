@@ -42,6 +42,7 @@ class RecoleccionsController < ApplicationController
   # POST /recoleccions.json
   def create
     @recoleccion = Recoleccion.new(params[:recoleccion])
+
     respond_to do |format|
       if @recoleccion.save
         format.html { redirect_to @recoleccion, notice: 'Recoleccion was successfully created.' }
