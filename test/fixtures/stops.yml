@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  stopid: MyString
+  stopdcode: MyString
+  stopname: MyString
+  stoplat: 1.5
+  stoplon: 1.5
+
+two:
+  stopid: MyString
+  stopdcode: MyString
+  stopname: MyString
+  stoplat: 1.5
+  stoplon: 1.5
