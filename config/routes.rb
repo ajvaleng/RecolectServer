@@ -1,8 +1,5 @@
 RecolectServer::Application.routes.draw do
 
-  resources :stops
-
-
   root :to => "home#index"
   
   devise_for :admin_users, ActiveAdmin::Devise.config
