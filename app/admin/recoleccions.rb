@@ -1,5 +1,5 @@
 ActiveAdmin.register Recoleccion do
-  scope :sin_ubicacion 
+  #scope :sin_ubicacion 
   
   index do 
     column :llegada_paradero
