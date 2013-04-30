@@ -75,14 +75,15 @@ class RecoleccionsController < ApplicationController
       #revisar cual es mas cercano
       sqr_error = 1000
       for i in 0..10
+        i -= secuencia_paraderos.count+1  if numero_secuencia-5+i > secuencia_paraderos.count
         if secuencia_paraderos[numero_secuencia-5+i]
           sqr_error_act = (recoleccion["latitude"].to_f - secuencia_paraderos[numero_secuencia-5+i]["gps_latitud"].to_f)**2 +
                         (recoleccion["longitude"].to_f - secuencia_paraderos[numero_secuencia-5+i]["gps_longitud"].to_f)**2
-        end
-        if (sqr_error >= sqr_error_act)
-          sqr_error = sqr_error_act
-          paradero = secuencia_paraderos[numero_secuencia-5+i]["codigo_paradero"]
-          
+          #puts sqr_error_act
+          if (sqr_error >= sqr_error_act)
+            sqr_error = sqr_error_act
+            paradero = secuencia_paraderos[numero_secuencia-5+i]["codigo_paradero"]
+          end
         end
       end
       recoleccion["paradero"] = paradero 
