@@ -1,5 +1,6 @@
 class RecoleccionsController < ApplicationController  
- require 'json'
+  require 'open-uri'
+  require 'json'
   
   # GET /recoleccions
   # GET /recoleccions.json
@@ -43,12 +44,48 @@ class RecoleccionsController < ApplicationController
   # POST /recoleccions
   # POST /recoleccions.json
   def create
-    # buscar 
-    
-    
+    puts
+    puts
+    puts ".............................................................."
+    puts
+    linea_inicial = "104"
+    codigo_paradero_inicial="PC37" 
+    linea_id = nil
     recoleccions = Array.new
     all_recoleccion_valid = true
+    numero_secuencia = nil
+    # Buscar todas las lineas para encontrar el id
+    lineas = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas").read)
+    #Accion para la primera recoleccion y encontra el id
+    recoleccion_inicial = params[:recoleccion].first
+    lineas.each do |linea|
+      linea_id = linea["linea_id"] if linea["codigo_linea"] == linea_inicial
+    end
+    #fetch secuencia y encontrar la sequencia donde parte
+    secuencias = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas/"+linea_id.to_s).read) if linea_id
+    secuencia_paraderos = secuencias["secuencias"][0]["secuencia_paraderos"]
+    # secuencia_paraderos[0] -> primer paradero de la sequencia
+    secuencia_paraderos.each do |paradero|
+      numero_secuencia = paradero["numero_secuencia"].to_i if paradero["codigo_paradero"] == codigo_paradero_inicial
+    end
+    
+    #incializa las recolecciones
     params[:recoleccion].each do |recoleccion|
+      #puts secuencia_paraderos
+      #revisar cual es mas cercano
+      sqr_error = 1000
+      for i in 0..10
+        if secuencia_paraderos[numero_secuencia-5+i]
+          sqr_error_act = (recoleccion["latitude"].to_f - secuencia_paraderos[numero_secuencia-5+i]["gps_latitud"].to_f)**2 +
+                        (recoleccion["longitude"].to_f - secuencia_paraderos[numero_secuencia-5+i]["gps_longitud"].to_f)**2
+        end
+        if (sqr_error >= sqr_error_act)
+          sqr_error = sqr_error_act
+          paradero = secuencia_paraderos[numero_secuencia-5+i]["codigo_paradero"]
+          
+        end
+      end
+      recoleccion["paradero"] = paradero 
       new_recoleccion = Recoleccion.new(recoleccion)
       recoleccions << new_recoleccion
       unless new_recoleccion.valid?

@@ -7,10 +7,11 @@ ActiveAdmin.register Recoleccion do
     column :presonas_suben
     column :personas_bajan
     column :recorrido
+    column :paradero
     column :patente
     column :nombre
     column :puerta
-    column :periodo   
+
     default_actions 
   end
   
@@ -20,5 +21,4 @@ ActiveAdmin.register Recoleccion do
     filter :patente
     filter :nombre
     filter :puerta
-    filter :periodo
 end

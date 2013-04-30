@@ -1,5 +1,6 @@
 class Recoleccion < ActiveRecord::Base
-  attr_accessible :latitude, :llegada_paradero, :longitude, :nombre, :patente, :periodo, :personas_bajan, :presonas_suben, :puerta, :recorrido, :salida_paradero
+  attr_accessible :latitude, :llegada_paradero, :longitude, :nombre, :patente, 
+  :periodo, :personas_bajan, :presonas_suben, :puerta, :recorrido, :salida_paradero, :paradero
 
   scope :sin_ubicacion, where(:lat => nil)
   
