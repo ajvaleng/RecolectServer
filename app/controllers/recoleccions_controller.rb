@@ -56,6 +56,31 @@ class RecoleccionsController < ApplicationController
         invalid_recoleccion = recoleccion
       end
     end
+#aqui va el match
+@stops = Stop.all
+
+    aux3 = 100
+
+
+    @stops.each do |stop|
+    aux1 = stop.longitude-new_recoleccion.longitude  
+    aux2 = stop.latitude-new_recoleccion.latitude
+    aux1 = aux1.abs
+    aux2 = aux2.abs
+    aux4 = Math.sqrt(aux1*aux1+aux2*aux2)
+
+    if aux1<0.001 && aux2<0.001
+      if aux4<aux3
+      new_recoleccion.recorrido=stop.stopname
+      aux3 = aux4
+    end
+    
+    end
+    end
+#termina el match
+
+
+
 
     respond_to do |format|
       if all_recoleccion_valid
