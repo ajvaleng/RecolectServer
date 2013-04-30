@@ -10,7 +10,8 @@ ActiveAdmin.register Recoleccion do
     column :patente
     column :nombre
     column :puerta
-    column :periodo    
+    column :periodo   
+    default_actions 
   end
   
     filter :llegada_paradero
