@@ -58,6 +58,8 @@ class RecoleccionsController < ApplicationController
     lineas = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas").read)
     #Accion para la primera recoleccion y encontra el id
     recoleccion_inicial = params[:recoleccion].first
+    recoleccion_inicial[:recorrido]= linea_inicial
+    codigo_paradero_inicial=params[:paradero_inicial]
     lineas.each do |linea|
       linea_id = linea["linea_id"] if linea["codigo_linea"] == linea_inicial
     end
