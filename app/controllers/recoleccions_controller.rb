@@ -50,8 +50,9 @@ class RecoleccionsController < ApplicationController
     numero_secuencia = nil
     linea_inicial = params[:linea]
     codigo_paradero_inicial=params[:paradero_inicial]
+    secuencia_paraderos = nil
     
-    #begin    
+    begin    
       # Buscar todas las lineas para encontrar el id
       lineas = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas").read)
       #Accion para encontra el id
@@ -65,14 +66,12 @@ class RecoleccionsController < ApplicationController
       #Aqui cambiar la logica para los distintos horarios
       
       tr = DateTime.parse(params[:recoleccion][0]["llegada_paradero"])
+      
       secuencias["secuencias"].each do |secuencia|
         secuencia["horarios"].each do |horario|
           if Recoleccion.cmp_wday horario["dias"], tr
-            puts tr
             if( tr.strftime(horario["hora_inicio"]) < tr.strftime('%H:%M:%S') and tr.strftime('%H:%M:%S') < tr.strftime(horario["hora_termino"]) )
-              puts "en el horario"
               secuencia_paraderos = secuencia["secuencia_paraderos"]
-              #secuencia_paraderos = secuencias["secuencias"][0]["secuencia_paraderos"] if secuencias
             end
           end
         end
@@ -115,23 +114,23 @@ class RecoleccionsController < ApplicationController
           invalid_recoleccion = recoleccion
         end
       end
-      puts "Todo bien"
-    # rescue
-    #   puts "Error al encontrar el paradero"
-    #   params[:recoleccion].each do |recoleccion|
-    #     recoleccion["patente"] = params[:patente]
-    #     recoleccion["puerta"] = params[:puerta]
-    #     recoleccion["nombre"] = params[:nombre]
-    #     recoleccion["recorrido"] = params[:linea]
-    #     recoleccion["paradero"] = "error"+params[:paradero_inicial]
-    #     new_recoleccion = Recoleccion.new(recoleccion)
-    #     recoleccions << new_recoleccion
-    #     unless new_recoleccion.valid?
-    #       all_recoleccion_valid = false
-    #       invalid_recoleccion = recoleccion
-    #     end
-    #   end
-    # end
+      puts "Paradero ecnontrado"
+    rescue
+      puts "Error al encontrar el paradero"
+      params[:recoleccion].each do |recoleccion|
+        recoleccion["patente"] = params[:patente]
+        recoleccion["puerta"] = params[:puerta]
+        recoleccion["nombre"] = params[:nombre]
+        recoleccion["recorrido"] = params[:linea]
+        recoleccion["paradero"] = "error"+params[:paradero_inicial]
+        new_recoleccion = Recoleccion.new(recoleccion)
+        recoleccions << new_recoleccion
+        unless new_recoleccion.valid?
+          all_recoleccion_valid = false
+          invalid_recoleccion = recoleccion
+        end
+      end
+    end
     
     respond_to do |format|
       if all_recoleccion_valid
