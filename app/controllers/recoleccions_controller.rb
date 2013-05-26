@@ -51,7 +51,7 @@ class RecoleccionsController < ApplicationController
     linea_inicial = params[:linea]
     codigo_paradero_inicial=params[:paradero_inicial]
     
-    begin    
+    #begin    
       # Buscar todas las lineas para encontrar el id
       lineas = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas").read)
       #Accion para encontra el id
@@ -63,7 +63,20 @@ class RecoleccionsController < ApplicationController
         secuencias = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas/"+linea_id.to_s).read)
       end
       #Aqui cambiar la logica para los distintos horarios
-      secuencia_paraderos = secuencias["secuencias"][0]["secuencia_paraderos"] if secuencias
+      
+      tr = DateTime.parse(params[:recoleccion][0]["llegada_paradero"])
+      secuencias["secuencias"].each do |secuencia|
+        secuencia["horarios"].each do |horario|
+          if Recoleccion.cmp_wday horario["dias"], tr
+            puts tr
+            if( tr.strftime(horario["hora_inicio"]) < tr.strftime('%H:%M:%S') and tr.strftime('%H:%M:%S') < tr.strftime(horario["hora_termino"]) )
+              puts "en el horario"
+              secuencia_paraderos = secuencia["secuencia_paraderos"]
+              #secuencia_paraderos = secuencias["secuencias"][0]["secuencia_paraderos"] if secuencias
+            end
+          end
+        end
+      end
       # secuencia_paraderos[0] -> primer paradero de la sequencia
       #Encuentra el numero de la sequencia a la que pertenece el paradero inicial
       secuencia_paraderos.each do |paradero|
@@ -102,31 +115,31 @@ class RecoleccionsController < ApplicationController
           invalid_recoleccion = recoleccion
         end
       end
-    rescue
-      P "Error al encontrar el paradero"
-      params[:recoleccion].each do |recoleccion|
-        recoleccion["patente"] = params[:patente]
-        recoleccion["puerta"] = params[:puerta]
-        recoleccion["nombre"] = params[:nombre]
-        recoleccion["recorrido"] = params[:linea]
-        recoleccion["paradero"] = "error"+params[:paradero_inicial]
-        new_recoleccion = Recoleccion.new(recoleccion)
-        recoleccions << new_recoleccion
-        unless new_recoleccion.valid?
-          all_recoleccion_valid = false
-          invalid_recoleccion = recoleccion
-        end
-      end
-    end
+      puts "Todo bien"
+    # rescue
+    #   puts "Error al encontrar el paradero"
+    #   params[:recoleccion].each do |recoleccion|
+    #     recoleccion["patente"] = params[:patente]
+    #     recoleccion["puerta"] = params[:puerta]
+    #     recoleccion["nombre"] = params[:nombre]
+    #     recoleccion["recorrido"] = params[:linea]
+    #     recoleccion["paradero"] = "error"+params[:paradero_inicial]
+    #     new_recoleccion = Recoleccion.new(recoleccion)
+    #     recoleccions << new_recoleccion
+    #     unless new_recoleccion.valid?
+    #       all_recoleccion_valid = false
+    #       invalid_recoleccion = recoleccion
+    #     end
+    #   end
+    # end
     
     respond_to do |format|
       if all_recoleccion_valid
         @recoleccions = []
         recoleccions.each do |recoleccion|
-              recoleccion.save
-              @recoleccions << recoleccion
-            end
-        
+          recoleccion.save
+          @recoleccions << recoleccion
+        end
         format.html { redirect_to @recoleccions.first, notice: 'Recoleccion was successfully created.' }
         format.json { render json: @recoleccions, status: :created }
       else

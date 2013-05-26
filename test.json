@@ -10,3 +10,34 @@ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POS
 
 curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"puerta":"2", "nombre":"ha ba", "patente":"hs", "linea":"409", "recoleccion":[{"presonas_suben":"5", "longitude":"-70.6129", "salida_paradero":"May 23, 2013 10:54:19 AM", "latitude":"-33.4997", "personas_bajan":"1", "llegada_paradero":"May 23, 2013 10:54:16 AM"}], "paradero_inicial":"pa354"}'  http://localhost:3000/recoleccions
 
+
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"puerta"=>"1", "nombre"=>"d d", "patente"=>"eyy", "linea"=>"409", "recoleccion"=>[{"presonas_suben"=>"6", "longitude"=>"-70.5334", "salida_paradero"=>"May 26, 2013 5:27:59 PM", "latitude"=>"-33.3507", "personas_bajan"=>"0", "llegada_paradero"=>"May 26, 2013 5:27:56 PM"}], "paradero_inicial"=>"pa354"}'  http://localhost:3000/recoleccions
+
+
+secuencias["secuencias"].each do |secuencia|
+secuencia["horarios"].each do |horario|
+if Recoleccion.cmp_wday horario["dias"], a
+if( a.strftime(horario["hora_inicio"]) < a.strftime('%H:%M:%S')  and a.strftime('%H:%M:%S') < a.strftime(horario["hora_termino"]) )
+  puts horario["hora_inicio"]+" < "+a.strftime('%H:%M:%S')+" < "+horario["hora_termino"]
+  puts horario["dias"]
+  puts "Dia"+a.strftime("%A")
+end
+end
+end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

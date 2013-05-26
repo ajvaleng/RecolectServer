@@ -12,5 +12,10 @@ class Recoleccion < ActiveRecord::Base
       end
     end
   end
+  
+  def self.cmp_wday (dias, fecha)
+    semana = ["","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
+    dias.include? (semana[fecha.wday])
+  end
 
 end
