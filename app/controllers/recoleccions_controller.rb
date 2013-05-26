@@ -44,36 +44,36 @@ class RecoleccionsController < ApplicationController
   # POST /recoleccions
   # POST /recoleccions.json
   def create
-    puts
-    puts
-    puts ".............................................................."
-    puts
-    linea_inicial = "104"
-    codigo_paradero_inicial="PC37" 
     linea_id = nil
     recoleccions = Array.new
     all_recoleccion_valid = true
     numero_secuencia = nil
+    
+    linea_inicial = params[:linea]
+    codigo_paradero_inicial=params[:paradero_inicial]
+    
     # Buscar todas las lineas para encontrar el id
     lineas = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas").read)
-    #Accion para la primera recoleccion y encontra el id
-    recoleccion_inicial = params[:recoleccion].first
-    recoleccion_inicial[:recorrido]= linea_inicial
-    codigo_paradero_inicial=params[:paradero_inicial]
+    #Accion para encontra el id
     lineas.each do |linea|
       linea_id = linea["linea_id"] if linea["codigo_linea"] == linea_inicial
     end
     #fetch secuencia y encontrar la sequencia donde parte
     secuencias = JSON.parse(open("http://citppuc.cloudapp.net/api/lineas/"+linea_id.to_s).read) if linea_id
+    #Aqui cambiar la logica para los distintos horarios
     secuencia_paraderos = secuencias["secuencias"][0]["secuencia_paraderos"]
+
+    #------
     # secuencia_paraderos[0] -> primer paradero de la sequencia
+    #Encuentra el numero de la sequencia a la que pertenece el paradero inicial
     secuencia_paraderos.each do |paradero|
-      numero_secuencia = paradero["numero_secuencia"].to_i if paradero["codigo_paradero"] == codigo_paradero_inicial
+      if  paradero["codigo_paradero"].casecmp(codigo_paradero_inicial) == 0
+        numero_secuencia = paradero["numero_secuencia"].to_i 
+        break
+      end
     end
-    
     #incializa las recolecciones
     params[:recoleccion].each do |recoleccion|
-      #puts secuencia_paraderos
       #revisar cual es mas cercano
       sqr_error = 1000
       for i in 0..10
@@ -88,7 +88,13 @@ class RecoleccionsController < ApplicationController
           end
         end
       end
+      #Setear datos genericos
       recoleccion["paradero"] = paradero 
+      recoleccion["recorrido"] = linea_inicial
+      recoleccion["patente"] = params[:patente]
+      recoleccion["puerta"] = params[:puerta]
+      recoleccion["nombre"] = params[:nombre]
+      
       new_recoleccion = Recoleccion.new(recoleccion)
       recoleccions << new_recoleccion
       unless new_recoleccion.valid?
