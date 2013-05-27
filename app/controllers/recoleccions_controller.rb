@@ -71,7 +71,11 @@ class RecoleccionsController < ApplicationController
         secuencia["horarios"].each do |horario|
           if Recoleccion.cmp_wday horario["dias"], tr
             if( tr.strftime(horario["hora_inicio"]) < tr.strftime('%H:%M:%S') and tr.strftime('%H:%M:%S') < tr.strftime(horario["hora_termino"]) )
-              secuencia_paraderos = secuencia["secuencia_paraderos"]
+              secuencia["secuencia_paraderos"][0..-2].each do |paradero|
+                if paradero["codigo_paradero"].casecmp(codigo_paradero_inicial) == 0
+                  secuencia_paraderos = secuencia["secuencia_paraderos"]
+                end
+              end
             end
           end
         end
