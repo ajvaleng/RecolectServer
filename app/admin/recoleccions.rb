@@ -2,11 +2,11 @@ ActiveAdmin.register Recoleccion do
   #scope :sin_ubicacion 
   
   index do 
-    column :llegada_paradero
-    column :salida_paradero
-    column :presonas_suben
-    column :personas_bajan
-    column :recorrido
+    column "Llegada",:llegada_paradero
+    column "Salida",:salida_paradero
+    column "Suben",:presonas_suben
+    column "Bajan",:personas_bajan
+    column "Linea",:recorrido
     column :paradero
     column :patente
     column :nombre

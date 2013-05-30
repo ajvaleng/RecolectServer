@@ -8,27 +8,24 @@ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POS
 curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"recoleccion":[{"presonas_suben":"3","nombre":"h j","recorrido":"104","salida_paradero":"Apr 30, 2013 4:58:56 PM","personas_bajan":"3","puerta":"5","patente":"h","longitude":"-70.60534","latitude":"-33.4233742","periodo":"null","llegada_paradero":"Apr 30, 2013 4:58:52 PM"},{"presonas_suben":"4","nombre":"h j","recorrido":"104","salida_paradero":"Apr 30, 2013 4:58:59 PM","personas_bajan":"0","puerta":"5","patente":"h","longitude":"-70.60364","latitude":"-33.42702","periodo":"null","llegada_paradero":"Apr 30, 2013 4:58:57 PM"},{"presonas_suben":"0","nombre":"h j","recorrido":"104","salida_paradero":"Apr 30, 2013 4:59:03 PM","personas_bajan":"5","puerta":"5","patente":"h","longitude":"-70.6016541","latitude":"-33.4343872","periodo":"null","llegada_paradero":"Apr 30, 2013 4:59:00 PM"}],"paradero_inicial":"PC37"}'  http://localhost:3000/recoleccions
  
 
-curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"puerta":"2", "nombre":"ha ba", "patente":"hs", "linea":"409", "recoleccion":[{"presonas_suben":"5", "longitude":"-70.6129", "salida_paradero":"May 23, 2013 10:54:19 AM", "latitude":"-33.4997", "personas_bajan":"1", "llegada_paradero":"May 23, 2013 10:54:16 AM"}], "paradero_inicial":"pa354"}'  http://localhost:3000/recoleccions
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"puerta":"2", "nombre":"Juan Perez", "patente":"hshd23", "linea":"409", "recoleccion":[{"presonas_suben":"5", "longitude":"-70.6129", "salida_paradero":"May 23, 2013 10:54:19 AM", "latitude":"-33.4997", "personas_bajan":"1", "llegada_paradero":"May 23, 2013 10:54:16 AM"},{"presonas_suben":"5", "longitude":"-70.6129", "salida_paradero":"May 23, 2013 10:54:19 AM", "latitude":"-33.4997", "personas_bajan":"1", "llegada_paradero":"May 23, 2013 10:54:16 AM"},{"presonas_suben":"5", "longitude":"-70.6129", "salida_paradero":"May 23, 2013 10:54:19 AM", "latitude":"-33.4997", "personas_bajan":"1", "llegada_paradero":"May 23, 2013 10:54:16 AM"},{"presonas_suben":"5", "longitude":"-70.6129", "salida_paradero":"May 23, 2013 10:54:19 AM", "latitude":"-33.4997", "personas_bajan":"1", "llegada_paradero":"May 23, 2013 10:54:16 AM"}], "paradero_inicial":"pa354"}'  http://recolectserver.herokuapp.com//recoleccions
 
 
 
+-------prueba oficial----DEMO iteracion 2
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"puerta":"1", "nombre":"Sergio Molina", "patente":"cx1413", "linea":"210", "recoleccion":[{"presonas_suben":"1", "longitude":"-70.6307", "salida_paradero":"May 28, 2013 10:28:59 AM", "latitude":"-33.45277", "personas_bajan":"1", "llegada_paradero":"May 28, 2013 10:28:30 AM"},{"presonas_suben":"3", "longitude":"-70.63006", "salida_paradero":"May 28, 2013 10:30:30 AM", "latitude":"-33.4551353", "personas_bajan":"1", "llegada_paradero":"May 28, 2013 10:30:00 AM"},{"presonas_suben":"0", "longitude":"-70.6286545", "salida_paradero":"May 28, 2013 10:32:10 AM", "latitude":"-33.45973", "personas_bajan":"0", "llegada_paradero":"May 28, 2013 10:32:35 AM"},{"presonas_suben":"5", "longitude":"-70.6281052", "salida_paradero":"May 28, 2013 10:35:25 AM", "latitude":"-33.45973", "personas_bajan":"2", "llegada_paradero":"May 28, 2013 10:35:57 AM"},{"presonas_suben":"2", "longitude":"-70.62722", "salida_paradero":"May 28, 2013 10:37:15 AM", "latitude":"-33.4646759", "personas_bajan":"0", "llegada_paradero":"May 28, 2013 10:37:47 AM"}], "paradero_inicial":"PA176"}' http://recolectserver.herokuapp.com//recoleccions
 
-curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"puerta":"1", "nombre":"d d", "patente":"eyy", "linea":"409", "recoleccion":[{"presonas_suben":"6", "longitude":"-70.5334", "salida_paradero":"May 26, 2013 5:27:59 PM", "latitude":"-33.3507", "personas_bajan":"0", "llegada_paradero":"May 26, 2013 5:27:56 PM"}], "paradero_inicial":"pa354"}'  http://localhost:3000/recoleccions
+------
 
+{"paradero_id":2800,"codigo_paradero":"PA176","numero_secuencia":19,"nombre_paradero":"Parada 6 / (M) Irarrázaval","gps_latitud":-33.45277,"gps_longitud":-70.6307},
 
-secuencias["secuencias"].each do |secuencia|
-secuencia["horarios"].each do |horario|
-if Recoleccion.cmp_wday horario["dias"], a
-if( a.strftime(horario["hora_inicio"]) < a.strftime('%H:%M:%S')  and a.strftime('%H:%M:%S') < a.strftime(horario["hora_termino"]) )
-  puts horario["hora_inicio"]+" < "+a.strftime('%H:%M:%S')+" < "+horario["hora_termino"]
-  puts horario["dias"]
-  puts "Dia"+a.strftime("%A")
-end
-end
-end
-end
+{"paradero_id":2801,"codigo_paradero":"PA177","numero_secuencia":20,"nombre_paradero":"Parada 4 / (M) Irarrázaval","gps_latitud":-33.4551353,"gps_longitud":-70.63006,},
 
+{"paradero_id":2807,"codigo_paradero":"PA178","numero_secuencia":21,"nombre_paradero":"Victoria / Av. Vicuña Mackenna","gps_latitud":-33.45973,"gps_longitud":-70.6286545,"distancia_origen":9.566064,"velocidad_tramo":"NaN"},
 
+{"paradero_id":2808,"codigo_paradero":"PA179","numero_secuencia":22,"nombre_paradero":"Miguel L. Prado / Av. Vicuña Mackenna","gps_latitud":-33.46166,"gps_longitud":-70.6281052,"distancia_origen":9.783136,"velocidad_tramo":"NaN"},
+
+{"paradero_id":67,"codigo_paradero":"PA180","numero_secuencia":23,"nombre_paradero":"Maule / Av. Vicuña Mackenna","gps_latitud":-33.4646759,"gps_longitud":-70.62722,"distancia_origen":10.130435,"velocidad_tramo":"NaN"}
 
 
 
